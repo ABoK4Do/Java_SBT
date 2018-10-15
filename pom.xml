@@ -7,7 +7,7 @@
 
 
     <groupId>ru.study</groupId>
-    <artifactId>tasks</artifactId>
+    <artifactId>Java_SBT</artifactId>
     <version>1.0</version>
 
     <build>
