@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class CustomLinkedListTest {
-    CustomLinkedList<String> customLinkedList;
+    private CustomLinkedList<String> customLinkedList;
 
     @Before
     public void init() {
