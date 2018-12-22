@@ -1,10 +1,14 @@
 package ru.study.homeWork.linkedlist;
 
-public class CustomLinkedList<E> {
+import java.util.Collection;
+import java.util.Iterator;
+
+public class CustomLinkedList<E> implements TaskLinkedList<E> {
     private Entity<E> start = null;
     private Entity<E> end = null;
     private int size = 0;
 
+    @Override
     public void add(E e) {
         Entity<E> local = new Entity<>(e);
         if (end != null) {
@@ -16,6 +20,7 @@ public class CustomLinkedList<E> {
         size++;
     }
 
+    @Override
     public void add(int index, E e) {
         Entity<E> current = getEntityByIndex(index);
         Entity<E> local = new Entity<>(e);
@@ -26,8 +31,38 @@ public class CustomLinkedList<E> {
         size++;
     }
 
+    @Override
     public E get(int index) {
         return getEntityByIndex(index).info;
+    }
+
+    @Override
+    public E remove(int index) {
+        Entity<E> current = getEntityByIndex(index);
+        if (current.next == null) {
+            end = current.previous;
+            end.next = null;
+        }
+        if (current.previous == null) {
+            start = current.next;
+            start.previous = null;
+        }
+        return current.info;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new InnerIterator();
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        if (c.size() == 0) return false;
+        Iterator<? extends E> iterator = c.iterator();
+        while (iterator.hasNext()) {
+            add(iterator.next());
+        }
+        return true;
     }
 
     public int size() {
@@ -46,7 +81,7 @@ public class CustomLinkedList<E> {
     }
 
     private Entity<E> getEntityByIndex(int index) {
-        if (index > size - 1) {
+        if (index > size - 1 || index < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
         Entity<E> current = start;
@@ -67,6 +102,23 @@ public class CustomLinkedList<E> {
 
         public String toString() {
             return info.toString();
+        }
+    }
+
+    private class InnerIterator implements Iterator<E> {
+        private Entity<E> current = start;
+
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public E next() {
+            E result = current.info;
+            current = current.next;
+            return result;
         }
     }
 
