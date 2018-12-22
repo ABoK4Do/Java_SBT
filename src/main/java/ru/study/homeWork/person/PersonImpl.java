@@ -1,4 +1,4 @@
-package ru.study.person;
+package ru.study.homeWork.person;
 
 public class PersonImpl implements Person {
 

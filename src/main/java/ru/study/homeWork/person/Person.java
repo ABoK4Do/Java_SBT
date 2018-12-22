@@ -1,4 +1,4 @@
-package ru.study.person;
+package ru.study.homeWork.person;
 
 public interface Person {
     Person getSpouse();
