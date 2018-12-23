@@ -32,7 +32,7 @@ public class BeanUtils {
             String getMethodName = methodGet.getName().substring(3);
             for (Method methodSet : methodsToSetter) {
                 String setMethodName = methodSet.getName().substring(3);
-                if (setMethodName.equals(getMethodName)) {
+                if (setMethodName.equals(getMethodName) && methodGet.getReturnType().equals(methodSet.getParameterTypes()[0])) {
                     methodSet.invoke(to,  methodGet.invoke(from));
                 }
             }
